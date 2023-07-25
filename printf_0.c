@@ -14,40 +14,34 @@
 int _printf(const char *format, ...)
 {
 	va_list output;
-	int i = 0;
-	int k;
-	char *str;
+	int i;
+	void (*ptspec[256])(va_list);
 
 	if (format == NULL)
 		return (-1);
 
 	va_start(output, format);
-	
+
+	ptspec[256] = NULL;
+	ptspec['c'] = specC;
+	ptspec['s'] = specS;
+	ptspec['%'] = specp;
 	for (i = 0; format && format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
-			switch (format[++i])
+			i++;
+			if (ptspec[format[i]])
+				ptspec[format[i]](output);
+			else
 			{
-				case 'c':
-					display(va_arg(output, int));
-					break;
-				case 's':
-					str = va_arg(output, char *);
-					for (k = 0; str[k] != '\0'; k++)
-						display(str[k]);
-					break;
-				case '%':
-					display('%');
-					break;
-				default:
-					display('%');
-					display(format[i]);
-					break;
+				display('%');
+				display(format[i]);
 			}
 		}
 		else
 			display(format[i]);
+		i++;
 	}
 	va_end(output);
 	return (i);
