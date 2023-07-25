@@ -15,7 +15,7 @@ int _printf(const char *format, ...)
 {
 	va_list output;
 	int i;
-	void (*ptspec[256])(va_list);
+	void (*ptspec[128])(va_list);
 
 	if (format == NULL)
 		return (-1);
@@ -26,13 +26,13 @@ int _printf(const char *format, ...)
 	ptspec['c'] = specC;
 	ptspec['s'] = specS;
 	ptspec['%'] = specp;
-	for (i = 0; format && format[i] != '\0'; i++)
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			if (ptspec[format[i]])
-				ptspec[format[i]](output);
+			if (ptspec[(unsigned char)format[i]])
+				ptspec[(unsigned char)format[i]](output);
 			else
 			{
 				display('%');
