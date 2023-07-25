@@ -27,6 +27,9 @@ int _printf(const char *format, ...)
 	ptspec['c'] = specC;
 	ptspec['s'] = specS;
 	ptspec['%'] = specp;
+	ptspec['d'] = specD;
+	ptspec['i'] = specI;
+
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
