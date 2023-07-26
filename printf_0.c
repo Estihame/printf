@@ -29,6 +29,7 @@ int _printf(const char *format, ...)
 	ptspec['%'] = specp;
 	ptspec['d'] = specD;
 	ptspec['i'] = specI;
+	ptspec['b'] = specB;
 
 	for (i = 0; format[i] != '\0'; i++)
 	{

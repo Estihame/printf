@@ -33,3 +33,17 @@ char *rev(char *s)
 
 	return (revS);
 }
+
+/**
+  * displayB - converts to binary number
+  * @n: number to be converted
+  * Return: 1
+  */
+
+int displayB(unsigned int n)
+{
+	if (n > 1)
+		return displayB(n / 2) + display('0' + n % 2);
+	else
+		return display('0' + n % 2);
+}
