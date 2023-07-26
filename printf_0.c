@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 	va_list output;
 	int i;
 	int j = 0;
-	void (*ptspec[128])(va_list);
+	int (*ptspec[128])(va_list);
 
 	if (format == NULL)
 		return (-1);
@@ -36,17 +36,19 @@ int _printf(const char *format, ...)
 		{
 			++i;
 			if (ptspec[(unsigned char)format[i]])
-				ptspec[(unsigned char)format[i]](output);
+				j += ptspec[(unsigned char)format[i]](output);
 			else
 			{
 				display('%');
 				display(format[i]);
+				j += 2;
 			}
 		}
 		else
+		{
 			display(format[i]);
-
-		j++;
+			j++;
+		}
 	}
 	va_end(output);
 	return (j);

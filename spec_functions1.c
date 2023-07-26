@@ -3,10 +3,10 @@
 /**
  * specD - format specifier to display decimal integers
  * @a: variadic list of arguments
- * Return: void
+ * Return: number of characters printed
  */
 
-void specD(va_list a)
+int specD(va_list a)
 {
 	int n = va_arg(a, int);
 	int i = 0;
@@ -18,7 +18,7 @@ void specD(va_list a)
 	if (n == 0)
 	{
 		display('0');
-		return;
+		return (1);
 	}
 
 	if (n < 0)
@@ -44,15 +44,16 @@ void specD(va_list a)
 		display(revBuf[j]);
 
 	free(revBuf);
+	return (j);
 }
 
 /**
  * specI - format specifier to display integers
  * @a: variadic list of arguments
- * Return: void
+ * Return: number of characters printed
  */
 
-void specI(va_list a)
+int specI(va_list a)
 {
-	specD(a);
+	return (specD(a));
 }
